@@ -1,5 +1,5 @@
-const Fact = require("../models/Fact");
-const Comment = require("../models/Comment");
+import Fact from "../models/Fact.js";
+import Comment from "../models/Comment.js";
 
 const normalizeFact = (fact) => ({
   id: fact._id,
@@ -163,7 +163,7 @@ const likeFact = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   getFacts,
   createFact,
   getFactById,

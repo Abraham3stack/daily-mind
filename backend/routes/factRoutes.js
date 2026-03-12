@@ -1,13 +1,13 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getFacts,
   createFact,
   getFactById,
   deleteFact,
   likeFact
-} = require("../controllers/factController");
-const { addComment, getCommentsForFact } = require("../controllers/commentController");
-const { protect } = require("../middleware/authMiddleware");
+} from "../controllers/factController.js";
+import { addComment, getCommentsForFact } from "../controllers/commentController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -19,4 +19,4 @@ router.post("/:id/like", protect, likeFact);
 router.post("/:id/comment", protect, addComment);
 router.get("/:id/comments", getCommentsForFact);
 
-module.exports = router;
+export default router;

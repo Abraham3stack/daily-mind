@@ -1,13 +1,13 @@
-const dotenv = require("dotenv");
-dotenv.config();
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import authRoutes from "./routes/authRoutes.js";
+import factRoutes from "./routes/factRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
-const authRoutes = require("./routes/authRoutes");
-const factRoutes = require("./routes/factRoutes");
-const aiRoutes = require("./routes/aiRoutes");
-const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+dotenv.config();
 
 const app = express();
 
@@ -36,11 +36,16 @@ const PORT = process.env.PORT || 5001;
 
 const startServer = async () => {
   try {
-    await connectDB();
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 5000
+    });
+    console.log("MongoDB connected");
+
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
+    console.error(`MongoDB connection error: ${error.message}`);
     console.error("Server startup aborted because the database connection failed.");
     process.exit(1);
   }

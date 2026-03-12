@@ -1,5 +1,5 @@
-const Comment = require("../models/Comment");
-const Fact = require("../models/Fact");
+import Comment from "../models/Comment.js";
+import Fact from "../models/Fact.js";
 
 const addComment = async (req, res, next) => {
   try {
@@ -63,7 +63,7 @@ const getCommentsForFact = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   addComment,
   getCommentsForFact
 };

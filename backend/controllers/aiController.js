@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const FACTS_PROMPT =
   "Generate 5 interesting 'Today I learned' facts for a social media platform about science, psychology, technology, or history. Each fact should be one sentence.";
@@ -53,6 +53,6 @@ const generateFacts = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   generateFacts
 };
