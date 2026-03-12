@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CreatePostModal from "@/components/CreatePostModal";
 import { LoadingBanner, PostSkeletonCard, ProfileInfoSkeleton, StatSkeleton } from "@/components/LoadingState";
@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import PostCard from "@/components/PostCard";
 import { getFacts, getStoredUser, getToken, getUserById } from "@/services/api";
 
-export default function ProfilePage() {
+function ProfilePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [posts, setPosts] = useState([]);
@@ -133,5 +133,24 @@ export default function ProfilePage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="page-shell">
+          <section className="mt-6 space-y-4 md:mt-8">
+            <LoadingBanner message="Preparing your profile view." />
+            {Array.from({ length: 2 }).map((_, index) => (
+              <PostSkeletonCard key={index} compact />
+            ))}
+          </section>
+        </main>
+      }
+    >
+      <ProfilePageContent />
+    </Suspense>
   );
 }
