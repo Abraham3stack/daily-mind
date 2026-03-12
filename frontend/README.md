@@ -12,7 +12,11 @@ npm run dev
 
 ## Environment
 
-Create `frontend/.env.local` and set:
+`frontend/.env` is the shared/default API target and can point to your deployed backend.
+
+`frontend/.env.local` is used for local development and overrides `.env` automatically when you run `npm run dev`.
+
+Current local development value:
 
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:5001

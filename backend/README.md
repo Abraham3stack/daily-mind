@@ -18,6 +18,12 @@ npm run dev
 
 Default backend port: `5001`
 
+To allow both local and deployed frontends, set `CORS_ORIGIN` as a comma-separated list:
+
+```bash
+CORS_ORIGIN=http://localhost:3000,https://your-vercel-app.vercel.app
+```
+
 For AI fact generation, also set:
 
 ```bash
