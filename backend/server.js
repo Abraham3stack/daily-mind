@@ -24,9 +24,11 @@ app.use(
       }
 
       callback(new Error(`CORS blocked for origin: ${origin}`));
-    }
+    },
+    credentials: true
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
